@@ -7,8 +7,8 @@ from led import LED
 import time
 import socket
 
-server_ip = ""
-server_port = 7006
+server_ip = "10.10.15.104"
+server_port = 5021
 server_addr_port = (server_ip, server_port)
 buffersize = 1024
 
@@ -16,9 +16,7 @@ udp_server_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 udp_server_socket.bind(server_addr_port)
 udp_server_socket.setblocking(False)
 
-h_flag = 1
-
-s = Stage(h_flag)
+s = Stage(1)
 index = -1
 running = True
 
@@ -29,12 +27,13 @@ def thread_UDP():
     while running:
         try:
             byte_addr_pair = udp_server_socket.recvfrom(buffersize)
+            
         except BlockingIOError:
             continue
-        
         msg = byte_addr_pair[0]
         
         result = msg.decode('utf-8')
+        print("result: ", result)
 
         if result == "9":
             s.flag_change()
@@ -52,6 +51,7 @@ def thread_UDP():
             index = 5
         elif result == "6":
             index = 6
+        
 
 
 def main():    
@@ -59,7 +59,7 @@ def main():
     global running
 
     # 스레드 생성
-    thread1 = threading.Thread(target=s.rotate, args=(running, ))
+    thread1 = threading.Thread(target=s.rotate)
     thread2 = threading.Thread(target=thread_UDP)
 
     # 스레드 시작
@@ -100,13 +100,13 @@ def main():
             
 
             if weapon.__class__.__name__ == "For_Person":
-                print("z")
+                print("Person Object Create")
                 led.led_weapon(0)
             elif weapon.__class__.__name__ == "For_Vehicle":
-                print("x")
+                print("Vehicle Object Create")
                 led.led_weapon(1)
             else:
-                print("c")
+                print("Plane Object Create")
                 led.led_weapon(2)
             
             weapon.set_angle(90)
@@ -117,15 +117,16 @@ def main():
 
             weapon.set_angle(0)
 
-            s.flag_change()
+            
 
             del weapon
             del led
-
+            time.sleep(5)
+            s.flag_change()
+                
             index = -1
-            running = False
-            s.rotate(running)
-            time.sleep(3)     
+            
+            
 
     # 스레드 종료 대기
     thread1.join()
