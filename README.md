@@ -7,11 +7,11 @@
 
 - **Sequence Diagram**
 
-![](https://velog.velcdn.com/images/jimeaning/post/c1d3346f-40c2-43d6-868a-066a570df51a/image.png)
+![](./Documents/sequence_diagram_v3.png)
 
 - **Class Diagram**
 
-![](https://velog.velcdn.com/images/jimeaning/post/4878a3dc-b7cf-43e7-b40c-a0d2c5efc58c/image.png)
+![](./Documents/class_diagram_v3.png)
 
 
 ## Clone code
