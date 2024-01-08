@@ -10,16 +10,33 @@ from argparse import ArgumentParser
 from queue import Empty, Queue
 from time import sleep
 
+import socket
+
+# 클라이언트가 보내고자 하는 서버의 IP와 PORT
+server_ip = "10.10.15.104"
+server_port = 3000
+server_addr_port = (server_ip, server_port)
+
+def send_message(msg):
+    bytes_to_send = str.encode(msg)    
+    udp_client_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+    udp_client_socket.sendto(bytes_to_send, server_addr_port)
+
 object_list = ["Human", "Car", "Plane"]
 
 capture = cv2.VideoCapture(0)
-capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+WIDTH = 640
+HEIGHT = 480
+capture.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
+
+send_flag = 0
 
 # For each detection, the description is in the [x_min, y_min, x_max, y_max, conf] format:
 # The image passed here is in BGR format with changed width and height. To display it in colors expected by matplotlib, use cvtColor function
-def convert_result_to_image(bgr_image, resized_image, boxes, label, threshold=0.3, conf_labels=True):
+def convert_result_to_image(bgr_image, resized_image, boxes, label, threshold=0.5, conf_labels=True):
     global object_list
+    global send_flag
     
     # Define colors for boxes and descriptions.
     colors = {"red": (255, 0, 0), "green": (0, 255, 0)}
@@ -62,12 +79,31 @@ def convert_result_to_image(bgr_image, resized_image, boxes, label, threshold=0.
                     2,
                     cv2.LINE_AA,
                 )
-        label_index = label_index + 1        
+            mid = int((x_max - x_min) / 2 + x_min)
+            
+            if send_flag == 0:
+                if mid < 200:
+                    send_message("1")
+                    print("send classification message")
+                    send_flag = 1
+                    #print("****",mid)
+            elif send_flag == 1:
+                if 300 < mid < 340:
+                    send_message("9")
+                    print("send stop message")
+                    send_flag = 0
+                    #print(mid)
+                    
+            
+        label_index = label_index + 1
 
+    rgb_image = cv2.cvtColor(rgb_image, cv2.COLOR_RGB2BGR)
+    
+    
     return rgb_image
 
 # model_xml_path = "./otx_v1/otx-workspace-DETECTION/outputs/export/openvino.xml"
-model_xml_path = "./otx_v2/outputs/export/openvino.xml"
+model_xml_path = "./model/detection/v1/openvino.xml"
    
 core = ov.Core()
 
@@ -87,7 +123,7 @@ label_layer_ir = compiled_model.output("labels")
 # image = cv2.imread(str(image_filename))
 
 # N,C,H,W = batch size, number of channels, height, width.
-H, W = 864, 864
+H, W = 736, 992
 
 while cv2.waitKey(33) < 0:
     # sleep(0.03)
