@@ -21,6 +21,35 @@ def send_message(msg):
     bytes_to_send = str.encode(msg)    
     udp_client_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
     udp_client_socket.sendto(bytes_to_send, server_addr_port)
+    
+def classify(frame):
+    model_xml_path = "./model/classification/car_v1/openvino.xml"
+
+    core = ov.Core()
+
+    model = core.read_model(model=model_xml_path)
+
+    compiled_model = core.compile_model(model=model, device_name='CPU')
+
+    output_layer = compiled_model.output(0)
+
+
+    image = frame
+
+    # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    # Resize to MobileNet image shape.
+    input_image = cv2.resize(src=image, dsize=(224, 224))
+
+    # Reshape to model input shape.
+    input_image = np.expand_dims(input_image, 0)
+    input_image = np.swapaxes(input_image,1,3)
+    input_image = np.swapaxes(input_image,2,3)
+
+    result_infer = compiled_model([input_image])[output_layer]
+    result_index = np.argmax(result_infer)
+
+    return result_index
+
 
 object_list = ["Human", "Car", "Plane"]
 
@@ -83,8 +112,10 @@ def convert_result_to_image(bgr_image, resized_image, boxes, label, threshold=0.
             
             if send_flag == 0:
                 if mid < 200:
-                    send_message("1")
-                    print("send classification message")
+                    crop_image = rgb_image[y_min:y_max, x_min:x_max]
+                    object_index = classify(crop_image)
+                    send_message(str(object_index+1))
+                    print("send classification message::",object_index+1)
                     send_flag = 1
                     #print("****",mid)
             elif send_flag == 1:
