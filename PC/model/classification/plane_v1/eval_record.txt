@@ -1,0 +1,26 @@
+/home/juhwan/workspace/.otx/lib/python3.10/site-packages/mmcv/__init__.py:20: UserWarning: On January 1, 2023, MMCV will release v2.0.0, in which it will remove components related to the training process and add a data transformation module. In addition, it will rename the package names mmcv to mmcv-lite and mmcv-full to mmcv. See https://github.com/open-mmlab/mmcv/blob/master/docs/en/compatibility.md for more details.
+  warnings.warn(
+[*] Update data configuration file to: data.yaml
+2024-01-08 15:19:42,525 | INFO : Classification mode: multiclass
+2024-01-08 15:19:42,525 | INFO : loading the model from the task env.
+2024-01-08 15:19:42,673 | INFO : infer()
+2024-01-08 15:19:42,675 | INFO : Training seed was set to 5 w/ deterministic=False.
+2024-01-08 15:19:42,677 | INFO : Try to create a 0 size memory pool.
+2024-01-08 15:19:42,677 | INFO : configure!: training=False
+load checkpoint from local path: /tmp/OTX-task-r_k79_rg/env_model_ckpt.pth
+2024-01-08 15:19:42,917 | INFO : 'in_channels' config in model.head is updated from -1 to 1280
+2024-01-08 15:19:42,919 | INFO : configure_data()
+2024-01-08 15:19:42,919 | INFO : task config!!!!: training=False
+load checkpoint from local path: /tmp/OTX-task-r_k79_rg/env_model_ckpt.pth
+2024-01-08 15:19:42,965 | INFO : infer!
+load checkpoint from local path: /tmp/OTX-task-r_k79_rg/env_model_ckpt.pth
+INFO:nncf:NNCF initialized successfully. Supported frameworks detected: torch, onnx, openvino
+WARNING:nncf:NNCF provides best results with torch==2.0.1, while current torch version is 1.13.1+cu117. If you encounter issues, consider switching to torch==2.0.1
+/home/juhwan/workspace/.otx/lib/python3.10/site-packages/nncf/torch/dynamic_graph/wrappers.py:74: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:230.)
+  op1 = operator(*args, **kwargs)
+WARNING:nncf:You are using DataParallel, which may cause significant performance issues with dynamic graph building. Consider using distributed training (DistributedDataParallel) instead.
+2024-01-08 15:19:45,024 | INFO : called evaluate()
+2024-01-08 15:19:45,026 | INFO : Accuracy after evaluation: 0.92
+2024-01-08 15:19:45,026 | INFO : Evaluation completed
+Performance(score: 0.92, dashboard: (3 metric groups))
+

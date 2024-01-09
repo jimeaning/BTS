@@ -1,0 +1,266 @@
+[*] Update data configuration file to: data.yaml
+/home/juhwan/workspace/.otx/lib/python3.10/site-packages/mmcv/__init__.py:20: UserWarning: On January 1, 2023, MMCV will release v2.0.0, in which it will remove components related to the training process and add a data transformation module. In addition, it will rename the package names mmcv to mmcv-lite and mmcv-full to mmcv. See https://github.com/open-mmlab/mmcv/blob/master/docs/en/compatibility.md for more details.
+  warnings.warn(
+2024-01-08 16:03:02,760 | INFO : Classification mode: multiclass
+2024-01-08 16:03:02,760 | INFO : train()
+2024-01-08 16:03:02,763 | INFO : Training seed was set to 5 w/ deterministic=False.
+2024-01-08 16:03:02,764 | INFO : Try to create a 0 size memory pool.
+2024-01-08 16:03:02,764 | INFO : configure!: training=True
+2024-01-08 16:03:02,766 | INFO : configure_data()
+2024-01-08 16:03:02,766 | INFO : task config!!!!: training=True
+2024-01-08 16:03:02,766 | INFO : train!
+2024-01-08 16:03:02,766 | INFO : cfg.gpu_ids = range(0, 1), distributed = False
+fatal: not a git repository (or any of the parent directories): .git
+2024-01-08 16:03:02,782 | INFO : Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]
+CUDA available: True
+GPU 0: NVIDIA GeForce RTX 4060
+CUDA_HOME: /usr/local/cuda-11.7
+NVCC: Cuda compilation tools, release 11.7, V11.7.64
+GCC: x86_64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+PyTorch: 1.13.1+cu117
+PyTorch compiling details: PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201402
+  - Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191122 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.6.0 (Git Hash 52b5f107dd9cf10910aaa19cb47f3abf9b349815)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.7
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86
+  - CuDNN 8.5
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.7, CUDNN_VERSION=8.5.0, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -fabi-version=11 -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wunused-local-typedefs -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Werror=cast-function-type -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.13.1, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, 
+
+TorchVision: 0.14.1+cu117
+OpenCV: 4.9.0
+MMCV: 1.7.0
+MMCV Compiler: GCC 11.4
+MMCV CUDA Compiler: 11.7
+MMClassification: 0.25.0+
+------------------------------------------------------------
+
+load checkpoint from http path: https://github.com/d-li14/mobilenetv3.pytorch/blob/master/pretrained/mobilenetv3-large-1cd25616.pth?raw=true
+The model and loaded state dict do not match exactly
+
+unexpected key in source state_dict: classifier.0.weight, classifier.0.bias, classifier.3.weight, classifier.3.bias
+
+2024-01-08 16:03:02,831 | INFO : init weight - https://github.com/d-li14/mobilenetv3.pytorch/blob/master/pretrained/mobilenetv3-large-1cd25616.pth?raw=true
+2024-01-08 16:03:03,376 | INFO : Task Adaptation: [] => ['fighter', 'hellicopter', 'plane']
+2024-01-08 16:03:03,376 | INFO : - Efficient Mode: True
+2024-01-08 16:03:03,376 | INFO : - Sampler type: balanced
+2024-01-08 16:03:03,376 | INFO : - Sampler flag: False
+2024-01-08 16:03:03,377 - mmcls - INFO - Start running, host: juhwan@juhwan-500TFA-500SFA, work_dir: /home/juhwan/bts_project/classification_900/plane_v3/outputs/20240108_160301_train/logs
+2024-01-08 16:03:03,377 - mmcls - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) ReduceLROnPlateauLrUpdaterHook     
+(ABOVE_NORMAL) Fp16OptimizerHook                  
+(ABOVE_NORMAL) CustomEvalHook                     
+(NORMAL      ) CheckpointHookWithValResults       
+(NORMAL      ) CancelInterfaceHook                
+(NORMAL      ) AdaptiveTrainSchedulingHook        
+(NORMAL      ) LoggerReplaceHook                  
+(71          ) OTXProgressHook                    
+(75          ) LazyEarlyStoppingHook              
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+(VERY_LOW    ) OTXLoggerHook                      
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) ReduceLROnPlateauLrUpdaterHook     
+(ABOVE_NORMAL) CustomEvalHook                     
+(NORMAL      ) TaskAdaptHook                      
+(LOW         ) IterTimerHook                      
+(71          ) OTXProgressHook                    
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+(VERY_LOW    ) OTXLoggerHook                      
+(VERY_LOW    ) MemCacheHook                       
+(LOWEST      ) ForceTrainModeHook                 
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) ReduceLROnPlateauLrUpdaterHook     
+(ABOVE_NORMAL) CustomEvalHook                     
+(NORMAL      ) AdaptiveTrainSchedulingHook        
+(LOW         ) IterTimerHook                      
+(71          ) OTXProgressHook                    
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) Fp16OptimizerHook                  
+(ABOVE_NORMAL) CustomEvalHook                     
+(NORMAL      ) CheckpointHookWithValResults       
+(LOW         ) IterTimerHook                      
+(71          ) OTXProgressHook                    
+(75          ) LazyEarlyStoppingHook              
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+(VERY_LOW    ) OTXLoggerHook                      
+ -------------------- 
+after_train_epoch:
+(ABOVE_NORMAL) CustomEvalHook                     
+(NORMAL      ) CheckpointHookWithValResults       
+(71          ) OTXProgressHook                    
+(75          ) LazyEarlyStoppingHook              
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+(VERY_LOW    ) OTXLoggerHook                      
+(VERY_LOW    ) MemCacheHook                       
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) TaskAdaptHook                      
+(LOW         ) IterTimerHook                      
+(71          ) OTXProgressHook                    
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+(VERY_LOW    ) OTXLoggerHook                      
+(VERY_LOW    ) MemCacheHook                       
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+(71          ) OTXProgressHook                    
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+(71          ) OTXProgressHook                    
+ -------------------- 
+after_val_epoch:
+(71          ) OTXProgressHook                    
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+(VERY_LOW    ) OTXLoggerHook                      
+(VERY_LOW    ) MemCacheHook                       
+ -------------------- 
+after_run:
+(NORMAL      ) CancelInterfaceHook                
+(71          ) OTXProgressHook                    
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+2024-01-08 16:03:03,377 - mmcls - INFO - workflow: [('train', 1)], max: 90 epochs
+2024-01-08 16:03:03,378 | INFO : cancel hook is initialized
+2024-01-08 16:03:03,378 | INFO : logger in the runner is replaced to the MPA logger
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 76.7 task/s, elapsed: 1s, ETA:     0s
+2024-01-08 16:03:04,541 | INFO : Update LrUpdaterHook patience: 2 -> 2
+2024-01-08 16:03:04,541 | INFO : Update EvalHook interval: 1 -> 4
+2024-01-08 16:03:04,541 | INFO : Update EarlyStoppingHook patience: 3 -> 3
+2024-01-08 16:03:05,028 | WARNING : training progress 1%
+2024-01-08 16:03:05,029 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:05,029 | INFO : Epoch [1][5/5]	lr: 3.479e-03, eta: 0:19:08, time: 0.129, data_time: 0.032, memory: 1923, current_iters: 4, loss: 1.0769
+2024-01-08 16:03:05,030 | INFO : Saving best checkpoint at 1 epochs
+2024-01-08 16:03:05,142 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:05,633 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:05,633 | INFO : Epoch [2][5/5]	lr: 5.413e-03, eta: 0:16:38, time: 0.098, data_time: 0.028, memory: 1923, current_iters: 9, loss: 0.7891
+2024-01-08 16:03:05,689 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:06,174 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:06,174 | INFO : Epoch [3][5/5]	lr: 5.800e-03, eta: 0:15:38, time: 0.097, data_time: 0.026, memory: 1923, current_iters: 14, loss: 0.5680
+2024-01-08 16:03:06,229 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:06,759 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:06,759 | INFO : Epoch [4][5/5]	lr: 5.800e-03, eta: 0:15:23, time: 0.106, data_time: 0.036, memory: 1923, current_iters: 19, loss: 0.3837
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 597.7 task/s, elapsed: 0s, ETA:     0s
+2024-01-08 16:03:06,886 | INFO : Saving best checkpoint at 4 epochs
+2024-01-08 16:03:06,995 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:06,996 | INFO : Epoch(val) [4][5]	accuracy_top-1: 0.8267, fighter accuracy: 0.7586, hellicopter accuracy: 1.0000, plane accuracy: 0.7273, mean accuracy: 0.8286, accuracy: 0.8267, current_iters: 20
+2024-01-08 16:03:06,996 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:06,996 | INFO : 
+Best Score: 0.8266667175292969, Current Score: 0.8266667175292969, Patience: 2 Count: 0
+2024-01-08 16:03:07,457 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:07,458 | INFO : Epoch [5][5/5]	lr: 5.800e-03, eta: 0:14:46, time: 0.092, data_time: 0.021, memory: 1923, current_iters: 24, loss: 0.2778
+2024-01-08 16:03:07,514 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:08,054 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:08,054 | INFO : Epoch [6][5/5]	lr: 5.800e-03, eta: 0:14:41, time: 0.108, data_time: 0.037, memory: 1923, current_iters: 29, loss: 0.2749
+2024-01-08 16:03:08,110 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:08,639 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:08,639 | INFO : Epoch [7][5/5]	lr: 5.800e-03, eta: 0:14:31, time: 0.106, data_time: 0.036, memory: 1923, current_iters: 34, loss: 0.2329
+2024-01-08 16:03:08,696 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:09,166 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:09,166 | INFO : Epoch [8][5/5]	lr: 5.800e-03, eta: 0:14:09, time: 0.094, data_time: 0.024, memory: 1923, current_iters: 39, loss: 0.1551
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 620.7 task/s, elapsed: 0s, ETA:     0s
+2024-01-08 16:03:09,289 | INFO : Saving best checkpoint at 8 epochs
+2024-01-08 16:03:09,400 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:09,400 | INFO : Epoch(val) [8][5]	accuracy_top-1: 0.8400, fighter accuracy: 0.9310, hellicopter accuracy: 0.8750, plane accuracy: 0.6818, mean accuracy: 0.8293, accuracy: 0.8400, current_iters: 40
+2024-01-08 16:03:09,401 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:09,401 | INFO : 
+Best Score: 0.84, Current Score: 0.84, Patience: 2 Count: 0
+2024-01-08 16:03:09,859 | WARNING : training progress 10%
+2024-01-08 16:03:09,859 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:09,859 | INFO : Epoch [9][5/5]	lr: 5.800e-03, eta: 0:13:48, time: 0.092, data_time: 0.021, memory: 1923, current_iters: 44, loss: 0.1496
+2024-01-08 16:03:09,916 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:10,431 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:10,431 | INFO : Epoch [10][5/5]	lr: 5.800e-03, eta: 0:13:38, time: 0.103, data_time: 0.033, memory: 1923, current_iters: 49, loss: 0.2042
+2024-01-08 16:03:10,488 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:11,027 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:11,027 | INFO : Epoch [11][5/5]	lr: 5.800e-03, eta: 0:13:32, time: 0.108, data_time: 0.038, memory: 1923, current_iters: 54, loss: 0.1332
+2024-01-08 16:03:11,083 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:11,558 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:11,558 | INFO : Epoch [12][5/5]	lr: 5.800e-03, eta: 0:13:16, time: 0.095, data_time: 0.025, memory: 1923, current_iters: 59, loss: 0.1374
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 634.9 task/s, elapsed: 0s, ETA:     0s
+2024-01-08 16:03:11,677 | INFO : Saving best checkpoint at 12 epochs
+2024-01-08 16:03:11,789 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:11,789 | INFO : Epoch(val) [12][5]	accuracy_top-1: 0.8667, fighter accuracy: 0.8621, hellicopter accuracy: 0.8333, plane accuracy: 0.9091, mean accuracy: 0.8682, accuracy: 0.8667, current_iters: 60
+2024-01-08 16:03:11,789 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:11,790 | INFO : 
+Best Score: 0.8666667175292969, Current Score: 0.8666667175292969, Patience: 2 Count: 0
+2024-01-08 16:03:12,271 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:12,271 | INFO : Epoch [13][5/5]	lr: 5.800e-03, eta: 0:13:02, time: 0.096, data_time: 0.026, memory: 1923, current_iters: 64, loss: 0.1044
+2024-01-08 16:03:12,328 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:12,851 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:12,851 | INFO : Epoch [14][5/5]	lr: 5.800e-03, eta: 0:12:54, time: 0.104, data_time: 0.035, memory: 1923, current_iters: 69, loss: 0.0576
+2024-01-08 16:03:12,906 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:13,429 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:13,429 | INFO : Epoch [15][5/5]	lr: 5.800e-03, eta: 0:12:45, time: 0.104, data_time: 0.035, memory: 1923, current_iters: 74, loss: 0.0703
+2024-01-08 16:03:13,485 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:14,001 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:14,001 | INFO : Epoch [16][5/5]	lr: 5.800e-03, eta: 0:12:35, time: 0.103, data_time: 0.031, memory: 1923, current_iters: 79, loss: 0.0934
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 627.4 task/s, elapsed: 0s, ETA:     0s
+2024-01-08 16:03:14,177 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:14,177 | INFO : Epoch(val) [16][5]	accuracy_top-1: 0.8533, fighter accuracy: 0.7931, hellicopter accuracy: 0.8750, plane accuracy: 0.9091, mean accuracy: 0.8591, accuracy: 0.8533, current_iters: 80
+2024-01-08 16:03:14,178 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:14,178 | INFO : 
+Best Score: 0.8666667175292969, Current Score: 0.8533333587646484, Patience: 2 Count: 1
+2024-01-08 16:03:14,649 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:14,649 | INFO : Epoch [17][5/5]	lr: 5.800e-03, eta: 0:12:21, time: 0.094, data_time: 0.023, memory: 1923, current_iters: 84, loss: 0.1073
+2024-01-08 16:03:14,706 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:15,177 | WARNING : training progress 20%
+2024-01-08 16:03:15,177 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:15,178 | INFO : Epoch [18][5/5]	lr: 5.800e-03, eta: 0:12:08, time: 0.094, data_time: 0.023, memory: 1923, current_iters: 89, loss: 0.0657
+2024-01-08 16:03:15,234 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:15,708 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:15,708 | INFO : Epoch [19][5/5]	lr: 5.800e-03, eta: 0:11:56, time: 0.095, data_time: 0.023, memory: 1923, current_iters: 94, loss: 0.0971
+2024-01-08 16:03:15,764 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:16,267 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:16,268 | INFO : Epoch [20][5/5]	lr: 5.800e-03, eta: 0:11:45, time: 0.101, data_time: 0.029, memory: 1923, current_iters: 99, loss: 0.0961
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 625.4 task/s, elapsed: 0s, ETA:     0s
+2024-01-08 16:03:16,444 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:16,444 | INFO : Epoch(val) [20][5]	accuracy_top-1: 0.8267, fighter accuracy: 0.6897, hellicopter accuracy: 0.8750, plane accuracy: 0.9545, mean accuracy: 0.8397, accuracy: 0.8267, current_iters: 100
+2024-01-08 16:03:16,445 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:16,445 | INFO : 
+Best Score: 0.8666667175292969, Current Score: 0.8266667175292969, Patience: 2 Count: 2
+2024-01-08 16:03:16,445 | INFO : 
+Drop LR from: 0.0058, to: 0.0029
+2024-01-08 16:03:16,928 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:16,928 | INFO : Epoch [21][5/5]	lr: 2.900e-03, eta: 0:11:34, time: 0.096, data_time: 0.026, memory: 1923, current_iters: 104, loss: 0.0738
+2024-01-08 16:03:16,984 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:17,456 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:17,456 | INFO : Epoch [22][5/5]	lr: 2.900e-03, eta: 0:11:22, time: 0.094, data_time: 0.023, memory: 1923, current_iters: 109, loss: 0.0779
+2024-01-08 16:03:17,513 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:17,996 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:17,996 | INFO : Epoch [23][5/5]	lr: 2.900e-03, eta: 0:11:11, time: 0.097, data_time: 0.027, memory: 1923, current_iters: 114, loss: 0.0778
+2024-01-08 16:03:18,053 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:18,588 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:18,589 | INFO : Epoch [24][5/5]	lr: 2.900e-03, eta: 0:11:02, time: 0.107, data_time: 0.036, memory: 1923, current_iters: 119, loss: 0.1069
+[>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>] 75/75, 618.0 task/s, elapsed: 0s, ETA:     0s
+2024-01-08 16:03:18,767 | INFO : 
+Early Stopping at :23 with best accuracy: 0.8666667175292969
+2024-01-08 16:03:18,768 | INFO : Exp name: outputs/20240108_160301_train/logs
+2024-01-08 16:03:18,768 | INFO : Epoch(val) [24][5]	accuracy_top-1: 0.8533, fighter accuracy: 0.7586, hellicopter accuracy: 0.9167, plane accuracy: 0.9091, mean accuracy: 0.8615, accuracy: 0.8533, current_iters: 120
+2024-01-08 16:03:18,768 | INFO : MemCacheHandlerBase uses 0 / 0 (0.0%) memory pool and store 0 items.
+2024-01-08 16:03:19,803 | INFO : called save_model
+2024-01-08 16:03:19,859 | INFO : Final model performance: Performance(score: 0.8666667175292969, dashboard: (10 metric groups))
+2024-01-08 16:03:19,859 | INFO : train done.
+otx train time elapsed:  0:00:18.174984
+otx train CLI report has been generated: outputs/20240108_160301_train/cli_report.log
+

@@ -1,0 +1,23 @@
+/home/juhwan/workspace/.otx/lib/python3.10/site-packages/mmcv/__init__.py:20: UserWarning: On January 1, 2023, MMCV will release v2.0.0, in which it will remove components related to the training process and add a data transformation module. In addition, it will rename the package names mmcv to mmcv-lite and mmcv-full to mmcv. See https://github.com/open-mmlab/mmcv/blob/master/docs/en/compatibility.md for more details.
+  warnings.warn(
+[*] Update data configuration file to: data.yaml
+2024-01-08 16:07:41,813 | INFO : Classification mode: multiclass
+2024-01-08 16:07:41,813 | INFO : loading the model from the task env.
+2024-01-08 16:07:41,878 | INFO : infer()
+2024-01-08 16:07:41,881 | INFO : Training seed was set to 5 w/ deterministic=False.
+2024-01-08 16:07:41,882 | INFO : Try to create a 0 size memory pool.
+2024-01-08 16:07:41,883 | INFO : configure!: training=False
+load checkpoint from local path: /tmp/OTX-task-kk0muvc2/env_model_ckpt.pth
+2024-01-08 16:07:41,941 | INFO : 'in_channels' config in model.head is updated from -1 to 192
+2024-01-08 16:07:41,941 | INFO : configure_data()
+2024-01-08 16:07:41,941 | INFO : task config!!!!: training=False
+load checkpoint from local path: /tmp/OTX-task-kk0muvc2/env_model_ckpt.pth
+2024-01-08 16:07:41,961 | INFO : infer!
+2024-01-08 16:07:42,020 - mmcv - INFO - load backbone in model from: https://download.openmmlab.com/mmclassification/v0/deit/deit-tiny_pt-4xb256_in1k_20220218-13b382a0.pth
+load checkpoint from http path: https://download.openmmlab.com/mmclassification/v0/deit/deit-tiny_pt-4xb256_in1k_20220218-13b382a0.pth
+load checkpoint from local path: /tmp/OTX-task-kk0muvc2/env_model_ckpt.pth
+2024-01-08 16:07:43,671 | INFO : called evaluate()
+2024-01-08 16:07:43,673 | INFO : Accuracy after evaluation: 0.9710144927536232
+2024-01-08 16:07:43,673 | INFO : Evaluation completed
+Performance(score: 0.9710144927536232, dashboard: (3 metric groups))
+
