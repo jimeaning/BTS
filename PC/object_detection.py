@@ -8,7 +8,7 @@ from object_classify import ObjectClassification
 H, W = 736, 992
 
 # 클라이언트가 보내고자 하는 서버의 IP와 PORT
-server_ip = "10.10.15.104"
+server_ip = "127.0.0.1"
 server_port = 3000
 server_addr_port = (server_ip, server_port)
 
@@ -89,11 +89,11 @@ class ObjectDetection:
                 
                 if self.send_flag == 0:
                     if mid < 200:
-                        if self.object_list[label[label_index]] == 0:
+                        if label[label_index] == 0:
                             print("Human Detected !!!")
                             self.send_message("0")
                             self.send_flag = 1
-                        elif self.object_list[label[label_index]] == 1:
+                        elif label[label_index] == 1:
                             print("Car Detected !!!")
                             
                             model_xml_path = "./model/classification/car_v1/openvino.xml"
@@ -105,7 +105,7 @@ class ObjectDetection:
                             print("send classification message::",object_index)
                             self.send_flag = 1
                             del objClassify
-                        elif self.object_list[label[label_index]] == 2:
+                        elif label[label_index] == 2:
                             print("Plane Detected !!!")
                             
                             model_xml_path = "./model/classification/plane_v1/openvino.xml"
