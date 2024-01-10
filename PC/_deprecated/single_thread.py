@@ -186,4 +186,3 @@ while cv2.waitKey(33) < 0:
     
     cv2.imshow("VideoFrame", convert_result_to_image(frame, resized_image, boxes, label, conf_labels=True))
     #plt.show()
-
