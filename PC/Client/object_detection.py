@@ -20,7 +20,7 @@ class ObjectDetection:
         self.send_flag = 0
         
         # model_xml_path = "./otx_v1/otx-workspace-DETECTION/outputs/export/openvino.xml"
-        model_xml_path = "./model/detection/v1/openvino.xml"
+        model_xml_path = "../model/detection/v1/openvino.xml"
 
         core = ov.Core()
 
@@ -96,7 +96,7 @@ class ObjectDetection:
                         elif label[label_index] == 1:
                             print("Car Detected !!!")
                             
-                            model_xml_path = "./model/classification/car_v1/openvino.xml"
+                            model_xml_path = "../model/classification/car_v1/openvino.xml"
                                     
                             objClassify = ObjectClassification(model_xml_path)
                             crop_image = rgb_image[y_min:y_max, x_min:x_max]
@@ -108,7 +108,7 @@ class ObjectDetection:
                         elif label[label_index] == 2:
                             print("Plane Detected !!!")
                             
-                            model_xml_path = "./model/classification/plane_v1/openvino.xml"
+                            model_xml_path = "../model/classification/plane_v1/openvino.xml"
                                     
                             objClassify = ObjectClassification(model_xml_path)
                             crop_image = rgb_image[y_min:y_max, x_min:x_max]

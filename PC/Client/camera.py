@@ -3,8 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from object_detection import ObjectDetection
+from send_frame import SendFrame
 
 objDetect = ObjectDetection()
+sendFrame = SendFrame()
 
 class Camera:
     def __init__(self):
@@ -23,7 +25,7 @@ class Camera:
         # N,C,H,W = batch size, number of channels, height, width.
         H, W = 736, 992
 
-        while cv2.waitKey(33) < 0:
+        while True:
             _, frame = capture.read()
             
             resized_image = cv2.resize(frame, (W, H))
@@ -34,7 +36,10 @@ class Camera:
             # Call the convert_result_to_image function after obtaining inference results.
             # plt.figure(figsize=(10, 6))
             # plt.axis("off")
-
-            cv2.imshow("VideoFrame", objDetect.obj_detect(frame, resized_image, input_image, conf_labels=True))
+            
+            result = objDetect.obj_detect(frame, resized_image, input_image, conf_labels=True)
+            sendFrame.send_frame(result)
+            
+            #cv2.imshow("VideoFrame", objDetect.obj_detect(frame, resized_image, input_image, conf_labels=True))
             #plt.show()
             
