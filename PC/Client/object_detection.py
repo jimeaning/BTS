@@ -1,6 +1,7 @@
 import cv2
 import socket
 import openvino as ov
+import matplotlib.pyplot as plt
 
 from object_classify import ObjectClassification
 
@@ -9,7 +10,7 @@ H, W = 736, 992
 
 # 클라이언트가 보내고자 하는 서버의 IP와 PORT
 server_ip = "127.0.0.1"
-server_port = 3000
+server_port = 8080
 server_addr_port = (server_ip, server_port)
 
 class ObjectDetection:
@@ -40,6 +41,21 @@ class ObjectDetection:
         bytes_to_send = str.encode(msg)    
         udp_client_socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
         udp_client_socket.sendto(bytes_to_send, server_addr_port)
+        
+    def get_roi(self, rgb_image, x_min, x_max, y_min, y_max):
+        # ROI의 중심점 좌표 구하기
+        cog_x, cog_y = x_min + ((x_max - x_min) // 2), y_max - ((y_max - y_min) // 2)
+        rgb_image = cv2.circle(rgb_image, (cog_x, cog_y), 3, (255, 0, 0), -1)
+        rgb_image = cv2.rectangle(rgb_image, (cog_x - 20, cog_y - 20), (cog_x + 20, cog_y + 20), (255, 0, 0), 2)
+        rgb_image = cv2.line(rgb_image, (cog_x, y_max), (cog_x, y_min), (255, 0, 0))
+        rgb_image = cv2.line(rgb_image, (x_min, cog_y), (x_max, cog_y), (255, 0, 0))
+        
+    def cal_angle(self, y_min, y_max):
+        cog_y = y_max - ((y_max - y_min) // 2)
+        cord_to_degree = cog_y * 0.042
+        degree = int(cord_to_degree)
+        
+        return degree
     
     def obj_detect(self, bgr_image, resized_image, input_image, threshold=0.5, conf_labels=True):
         boxes = self.compiled_model([input_image])[self.output_layer_ir]
@@ -71,6 +87,8 @@ class ObjectDetection:
 
                 # Draw a box based on the position, parameters in rectangle function are: image, start_point, end_point, color, thickness.
                 rgb_image = cv2.rectangle(rgb_image, (x_min, y_min), (x_max, y_max), self.colors["green"], 3)
+                
+                self.get_roi(rgb_image, x_min, x_max, y_min, y_max)
 
                 # Add text to the image based on position and confidence.
                 # Parameters in text function are: image, text, bottom-left_corner_textfield, font, font_scale, color, thickness, line_type.
@@ -123,6 +141,19 @@ class ObjectDetection:
                         self.send_message("9")
                         print("send stop message")
                         self.send_flag = 0
+                        
+                        # ROI 각도 계산 후 송신
+                        angle = str(self.cal_angle(y_min, y_max))
+                        print(angle)
+                        self.send_message(angle)
+                        
+                        # Target frame 3초 간 새 창에서 띄우기
+                        plt.imshow(rgb_image)
+                        plt.title('Target Detected')
+                        plt.axis('off')
+                        plt.show(block=False)
+                        plt.pause(3)
+                        plt.close()
                         #print(mid)
 
             label_index = label_index + 1
