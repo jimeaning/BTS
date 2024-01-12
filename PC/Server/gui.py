@@ -1,4 +1,5 @@
 import queue
+import time
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QVBoxLayout
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt, QTimer
@@ -27,9 +28,9 @@ class MainWindow(QMainWindow):
         
         vbox = QVBoxLayout(widget)
         
-        pixmap = QPixmap('./class_diagram.png')
+        pixmap = QPixmap('image/supersonic.jpg')
         self.lbl_img = QLabel()
-        self.lbl_img.setPixmap(pixmap)
+        self.lbl_img.setPixmap(pixmap.scaled(640, 480, aspectRatioMode=Qt.KeepAspectRatio))
         
         lbl_size = QLabel('Hi')
         lbl_size.setAlignment(Qt.AlignCenter)
