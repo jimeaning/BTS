@@ -51,9 +51,12 @@ class ObjectDetection:
         rgb_image = cv2.line(rgb_image, (x_min, cog_y), (x_max, cog_y), (255, 0, 0))
         
     def cal_angle(self, y_min, y_max):
-        cog_y = y_max - ((y_max - y_min) // 2)
+        cog_y = y_min + ((y_max - y_min) // 2)
+        print(cog_y)
         cord_to_degree = cog_y * 0.042
-        degree = int(cord_to_degree)
+        print("cord to degree", cord_to_degree)
+        degree = 55 + int(cord_to_degree)
+        print("degree", degree)
         
         return degree
     
