@@ -12,4 +12,4 @@ add_executable (program main.cpp)
 
 target_link_libraries(program weapon stage led pthread rt)
 
-include_directories(./pigpio)
+include_directories(./thirdparty)
