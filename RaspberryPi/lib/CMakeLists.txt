@@ -1,0 +1,16 @@
+add_library(weapon SHARED weapon.cpp)
+add_library(stage SHARED stage.cpp)
+add_library(led SHARED led.cpp)
+target_include_directories(weapon PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_include_directories(stage PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_include_directories(led PUBLIC ${CMAKE_SOURCE_DIR}/includes)
+target_compile_options(weapon PRIVATE -Wall -Werror)
+target_compile_options(weapon PRIVATE -Wall -Werror)
+# pigpio 라이브러리를 링크
+target_include_directories(weapon PUBLIC /test6/pigpio)
+target_include_directories(stage PUBLIC /test6/pigpio)
+target_include_directories(led PUBLIC /test6/pigpio)
+target_link_libraries(weapon PUBLIC pigpio)
+target_link_libraries(stage PUBLIC pigpio)
+target_link_libraries(led PUBLIC pigpio)
+
