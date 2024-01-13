@@ -1,0 +1,8 @@
+/home/ubuntu/test6/build/CMakeFiles/program.dir
+/home/ubuntu/test6/build/CMakeFiles/edit_cache.dir
+/home/ubuntu/test6/build/CMakeFiles/rebuild_cache.dir
+/home/ubuntu/test6/build/lib/CMakeFiles/weapon.dir
+/home/ubuntu/test6/build/lib/CMakeFiles/stage.dir
+/home/ubuntu/test6/build/lib/CMakeFiles/led.dir
+/home/ubuntu/test6/build/lib/CMakeFiles/edit_cache.dir
+/home/ubuntu/test6/build/lib/CMakeFiles/rebuild_cache.dir

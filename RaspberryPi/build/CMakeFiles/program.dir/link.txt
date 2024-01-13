@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/program.dir/main.cpp.o -o program  -Wl,-rpath,/home/ubuntu/test6/build/lib lib/libweapon.so lib/libstage.so lib/libled.so -lpthread -lrt -lpigpio 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libweapon.so -o libweapon.so CMakeFiles/weapon.dir/weapon.cpp.o  -lpigpio 
