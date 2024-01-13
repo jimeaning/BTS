@@ -9,8 +9,8 @@ from object_classify import ObjectClassification
 H, W = 736, 992
 
 # 클라이언트가 보내고자 하는 서버의 IP와 PORT
-server_ip = "127.0.0.1"
-server_port = 8080
+server_ip = "10.10.15.102"
+server_port = 3000
 server_addr_port = (server_ip, server_port)
 
 class ObjectDetection:
@@ -32,7 +32,7 @@ class ObjectDetection:
         # self.input_layer_ir = self.compiled_model.input(0)
         self.output_layer_ir = self.compiled_model.output("boxes")
         self.label_layer_ir = self.compiled_model.output("labels")
-        
+                
     def __del__(self):
         print("Object Detection 클래스 종료")
         pass
@@ -52,11 +52,8 @@ class ObjectDetection:
         
     def cal_angle(self, y_min, y_max):
         cog_y = y_min + ((y_max - y_min) // 2)
-        print(cog_y)
         cord_to_degree = cog_y * 0.042
-        print("cord to degree", cord_to_degree)
         degree = 55 + int(cord_to_degree)
-        print("degree", degree)
         
         return degree
     
@@ -121,7 +118,7 @@ class ObjectDetection:
                                     
                             objClassify = ObjectClassification(model_xml_path)
                             crop_image = rgb_image[y_min:y_max, x_min:x_max]
-                            object_index = objClassify.classify(crop_image)
+                            object_index = objClassify.classify(crop_image) + 1
                             self.send_message(str(object_index))
                             print("send classification message::",object_index)
                             self.send_flag = 1
@@ -133,7 +130,7 @@ class ObjectDetection:
                                     
                             objClassify = ObjectClassification(model_xml_path)
                             crop_image = rgb_image[y_min:y_max, x_min:x_max]
-                            object_index = objClassify.classify(crop_image)
+                            object_index = objClassify.classify(crop_image) + 4
                             self.send_message(str(object_index))
                             print("send classification message::",object_index)
                             self.send_flag = 1

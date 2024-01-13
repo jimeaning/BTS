@@ -5,8 +5,8 @@ import numpy as np
 from PyQt5.QtCore import QThread
 
 # 서버 설정
-host = '127.0.0.1'
-port = 8080
+host = "127.0.0.1"
+port = 5000
 
 class ReceiveFrame(QThread):    
     def __init__(self, frame_queue):
@@ -41,3 +41,4 @@ class ReceiveFrame(QThread):
                 
             frame_np = cv2.imdecode(np.frombuffer(frame_data, dtype=np.uint8), 1)
             self.frame_queue.put(frame_np)
+

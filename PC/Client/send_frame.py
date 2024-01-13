@@ -3,8 +3,8 @@ import cv2
 import struct
 
 # 서버 설정
-host = '127.0.0.1'
-port = 8080
+host = "127.0.0.1"
+port = 5000
 
 class SendFrame:
     def __init__(self):
