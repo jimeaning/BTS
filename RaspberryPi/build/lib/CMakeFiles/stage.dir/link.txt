@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared -Wl,-soname,libstage.so -o libstage.so CMakeFiles/stage.dir/stage.cpp.o  -lpigpio 

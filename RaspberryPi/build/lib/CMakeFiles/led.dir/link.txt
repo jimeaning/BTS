@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared -Wl,-soname,libled.so -o libled.so CMakeFiles/led.dir/led.cpp.o  -lpigpio 
