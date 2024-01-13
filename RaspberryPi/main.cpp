@@ -12,6 +12,9 @@
 #define SERVER_IP "10.10.15.102"
 #define SERVER_PORT 3000
 #define BUFFER_SIZE 1024
+#define GUI_IP "10.10.15.106"
+#define GUI_PORT 4000
+
 
 char buffer[BUFFER_SIZE];
 int d_index = -1;
@@ -87,6 +90,13 @@ void handleUDP()
 
 int main()
 {
+    int gui_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    struct sockaddr_in serverAddress;
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_port = htons(GUI_PORT);
+    inet_pton(AF_INET, GUI_IP, &(serverAddress.sin_addr));
+    
+    connect(gui_sockfd, (struct sockaddr *)&serverAddress, sizeof(serverAddress));
     //Stage stage;
     Stage* stage = new Stage();
     std::thread udpThread(handleUDP); // 쓰레드 생성 및 실행
@@ -105,42 +115,56 @@ int main()
 		weapon = new For_Person("0", 5);
 		std::cout << "전방에 사람 발견" << std::endl;
 		led -> ledWeapon(led -> pin[0]);
+		std::string message = "전방에 사람 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }
 	    else if (d_index == 1)
 	    {
 		weapon = new For_Vehicle("0", 6);
 		std::cout << "전방에 레토나 발견" << std::endl;
 		led -> ledWeapon(led -> pin[1]);
+		std::string message = "전방에 레토나 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }
 	    else if (d_index == 2)
 	    {
 		weapon = new For_Vehicle("1", 6);
 		std::cout << "전방에 두돈반 발견" << std::endl;
 		led -> ledWeapon(led -> pin[1]);
+		std::string message = "전방에 두돈반 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }
 	    else if (d_index == 3)
 	    {
 		weapon = new For_Vehicle("2", 6);
 		std::cout << "전방에 탱크 발견" << std::endl;
 		led -> ledWeapon(led -> pin[1]);
+		std::string message = "전방에 탱크 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }          
 	    else if (d_index == 4)
 	    {
 		weapon = new For_Plane("0", 13);
 		std::cout << "전방에 수송기 발견" << std::endl;
 		led -> ledWeapon(led -> pin[2]);
+		std::string message = "전방에 수송기 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }
 	    else if (d_index == 5)
 	    {
 		weapon = new For_Plane("1", 13);
 		std::cout << "전방에 헬리콥터 발견" << std::endl;
 		led -> ledWeapon(led -> pin[2]);
+		std::string message = "전방에 헬리콥터 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }
 	    else if (d_index == 6)
 	    {
 		weapon = new For_Plane("2", 13);
 		std::cout << "전방에 전투기 발견" << std::endl;
 		led -> ledWeapon(led -> pin[2]);
+		std::string message = "전방에 전투기 발견!";
+		send(gui_sockfd, message.c_str(), message.size(), 0);
 	    }
 	}
 	
@@ -168,6 +192,8 @@ int main()
 	    std::cout << "발사 준비 완료" << std::endl;
 	    led -> ledLaunch();
 	    flag=2;
+	    std::string message = "0";
+	    send(gui_sockfd, message.c_str(), message.size(), 0);
 	}
 	if(strcmp(buffer, "발사") == 0 && flag == 2)
 	{
@@ -185,6 +211,7 @@ int main()
 	}
 	
     }
+    close(gui_sockfd);
     udpThread.join();
     stageThread.join();
     delete weapon;
