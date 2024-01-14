@@ -3,32 +3,37 @@
 
 #include <string>
 
-class Weapon {
+class Weapon
+{
 public:
-    Weapon(std::string _type, int servoPin);
+    Weapon(std::string _type, int servo_pin);
     virtual ~Weapon();
-    virtual void set_angle(int angle);
+    virtual void SetAngle(int angle);
 private:
     std::string _type;
     int angle;
-    int servoPin_;
-};
-class For_Person : public Weapon {
-public:
-    For_Person(std::string _type, int servoPin);
-    void set_angle(int angle) override;
+    int servo_pin_;
 };
 
-class For_Vehicle : public Weapon {
+class ForPerson : public Weapon
+{
 public:
-    For_Vehicle(std::string _type, int servoPin);
-    void set_angle(int angle) override;
+    ForPerson(std::string _type, int servo_pin);
+    void SetAngle(int angle) override;
 };
 
-class For_Plane : public Weapon {
+class ForVehicle : public Weapon
+{
 public:
-    For_Plane(std::string _type, int servoPin);
-    void set_angle(int angle) override;
+    ForVehicle(std::string _type, int servo_pin);
+    void SetAngle(int angle) override;
+};
+
+class ForPlane : public Weapon
+{
+public:
+    ForPlane(std::string _type, int servo_pin);
+    void SetAngle(int angle) override;
 };
 #endif // WEAPON_H
 

@@ -10,33 +10,37 @@ Led::Led()
     }
     else
     {
-		for (int i = 0; i < 4; ++i)
-		{
-			gpioSetMode(pin[i], PI_OUTPUT);
-		}
+	for (int i = 0; i < 4; ++i)
+	{
+	    // pin 활성화
+	    gpioSetMode(pin[i], PI_OUTPUT);
+	}
+	std::cout << "LED 객체 생성" << std::endl;
     }
 }
 
 Led::~Led()
 {
-	gpioTerminate(); // 클래스 소멸 시 필요한 정리 작업 수행
+    // pin 비활성화
+    gpioTerminate();
+    std::cout << "LED 객체 소멸" << std::endl;
 }
 
-void Led::ledWeapon(int pin_num)	// led -> pin[0]
+void Led::LedWeapon(int pin_num)	// led -> pin[0]
 {
-	gpioWrite(pin_num, 1);
-	std::cout << "Weapon LED On" << std::endl;
+    gpioWrite(pin_num, 1);
+    std::cout << "Weapon LED On" << std::endl;
 }
-void Led::ledLaunch()
+void Led::LedLaunch()
 {
-	gpioWrite(pin[3], 1);
-	std::cout << "Launch LED On" << std::endl;
+    gpioWrite(pin[3], 1);
+    std::cout << "Launch LED On" << std::endl;
 }
-void Led::ledAllOff()
+void Led::LedAllOff()
 {
-	for (int i = 0; i < 4; i++)
-	{
-		gpioWrite(pin[i], 0);
-	}
-	std::cout << "LED All Off" << std::endl;
+    for (int i = 0; i < 4; i++)
+    {
+	gpioWrite(pin[i], 0);
+    }
+    std::cout << "LED All Off" << std::endl;
 }
