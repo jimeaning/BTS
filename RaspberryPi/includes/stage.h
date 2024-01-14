@@ -14,7 +14,7 @@ private:
     int pin[4] = {17,18,27,22};
     int h_flag = 1;  // 멤버 변수
     int start_index = 0; // start_index 멤버 변수 추가
-    int steps = 256; // steps 멤버 변수 추가
+    int steps = 128; // steps 멤버 변수 추가
     int way_flag=0; // way_flag 멤버 변수 추가
 };
 

@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <iostream>
 
-Stage::Stage()// : h_flag(1), start_index(0), steps(256), way_flag(0) 
+Stage::Stage() 
     {
     // 생성자 초기화 리스트에서 h_flag 및 기타 멤버 변수 초기화
     
@@ -43,7 +43,7 @@ void Stage::rotateMotor() {
                         for (int k = 0; k < 4; ++k) {
                             gpioWrite(pin[k], sequence[j][k]);
                         }
-                        gpioDelay(2000);
+                        gpioDelay(3000);
                     }
 
                     if (i == (steps - 1)) {
@@ -64,7 +64,7 @@ void Stage::rotateMotor() {
                             gpioWrite(pin[k], sequence[j][k]);
                             
                         }
-                        gpioDelay(2000);
+                        gpioDelay(3000);
                     }
 
                     if (i == (steps - 1)) {
