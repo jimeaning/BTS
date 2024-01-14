@@ -3,7 +3,7 @@ import cv2
 import struct
 
 # 서버 설정
-host = "10.10.15.106"
+host = "10.10.15.103"
 port = 5000
 
 class SendFrame:
@@ -24,6 +24,7 @@ class SendFrame:
         
         self.client_socket.sendall(img_bytes)
 
+# Video 설정
 width = 640
 height = 480
 capture = cv2.VideoCapture(0)
