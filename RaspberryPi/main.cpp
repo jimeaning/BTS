@@ -181,6 +181,7 @@ int main()
 	if (flag == 0 && buffer[0] != '\0')
 	{
 	    int Angle = std::stoi(buffer);
+	    Angle = 90 - Angle;
 	    weapon -> set_angle(Angle);
 	    sleep(1);
 	    flag = 1;
@@ -199,7 +200,7 @@ int main()
 	{
 	    std::cout << "led_all_off" << std::endl;
 	    sleep(3);
-	    weapon -> set_angle(0);
+	    weapon -> set_angle(90);
 	    memset(buffer, 0, sizeof(buffer));
 	    //delete weapon;
 	    weapon = nullptr;

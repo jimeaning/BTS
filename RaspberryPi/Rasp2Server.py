@@ -3,7 +3,7 @@ import cv2
 import struct
 
 # 서버 설정
-host = "10.10.15.103"
+host = "10.10.15.106"
 port = 5000
 
 class SendFrame:
