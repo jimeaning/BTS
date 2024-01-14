@@ -1,3 +1,6 @@
+"""
+영상 프레임 통신을 위한 모듈
+"""
 import socket
 import cv2
 import struct
@@ -6,7 +9,9 @@ import struct
 host = "127.0.0.1"
 port = 5000
 
+
 class SendFrame:
+    """영상 프레임 통신을 위한 클래스 (HW -> Server)"""
     def __init__(self):
         self.host = host
         self.port = port

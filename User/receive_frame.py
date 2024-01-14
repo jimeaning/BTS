@@ -1,3 +1,6 @@
+"""
+영상 프레임 통신을 위한 모듈
+"""
 import socket
 import struct
 import cv2
@@ -8,7 +11,9 @@ from PyQt5.QtCore import QThread
 host = "127.0.0.1"
 port = 5000
 
+
 class ReceiveFrame(QThread):    
+    """영상 프레임 통신을 위한 클래스 (Server -> User)"""
     def __init__(self, frame_queue):
         super().__init__()        
         self.frame_queue = frame_queue

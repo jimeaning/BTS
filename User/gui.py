@@ -1,5 +1,7 @@
+"""
+GUI 모듈
+"""
 import queue
-import threading
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QVBoxLayout, QFrame, QHBoxLayout, QTextEdit, QSizePolicy, QLCDNumber, QPushButton, QMenuBar,QStatusBar
 from PyQt5.QtGui import QPixmap, QImage
@@ -12,10 +14,10 @@ from sender import SendMsg
 
 
 class MainWindow(QMainWindow):
+    """GUI 클래스"""
     def __init__(self):
         super().__init__()
-        # 남은 탄 개수
-        self.counter = 3
+        self.counter = 3 # 남은 탄 개수
         self.count_timer = 5  # 초기 타이머 남은 시간
         self.initUI()
         
@@ -25,42 +27,39 @@ class MainWindow(QMainWindow):
         
         self.frame_queue = queue.Queue(maxsize=30)    # 프레임이 저장될 큐
         self.msg_queue = queue.Queue(maxsize=30)    # 메세지가 저장될 큐
-        self.startThread()
+        self.StartThread()
                 
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.camViewer)
+        self.timer.timeout.connect(self.CamViewer)
         self.timer.start(30)
         
-    def initUI(self):
-        # UI 틀 만들기
-        
+    def initUI(self):        
         # Main window
         self.setWindowTitle('BTS')
         self.setObjectName("MainWindow")
         self.resize(800, 850)
 
-        self.centralwidget = QWidget()
-        self.centralwidget.setObjectName("centralwidget")
-        self.setCentralWidget(self.centralwidget)
+        self.central_widget = QWidget()
+        self.central_widget.setObjectName("central_widget")
+        self.setCentralWidget(self.central_widget)
 
         # 웹캠이 들어갈 영역
-        self.frame = QFrame(self.centralwidget)
+        self.frame = QFrame(self.central_widget)
         self.frame.setGeometry(QRect(60, 20, 640, 480))
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.frame.setObjectName("frame")
 
-        # 콘솔,타이머, 발사버튼, 남은 탄 갯수에 대한 그룹화 된 위젯
-        self.horizontalLayoutWidget = QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QRect(60, 540, 640, 210))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-
-        #발사 버튼?
-        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout") 
+        # 콘솔, 타이머, 발사 버튼, 남은 탄 갯수에 대한 그룹화된 위젯
+        self.horizontal_layoutWidget = QWidget(self.central_widget)
+        self.horizontal_layoutWidget.setGeometry(QRect(60, 540, 640, 210))
+        self.horizontal_layoutWidget.setObjectName("horizontal_layoutWidget")
+        self.horizontal_layout = QHBoxLayout(self.horizontal_layoutWidget)
+        self.horizontal_layout.setContentsMargins(0, 0, 0, 0)
+        self.horizontal_layout.setObjectName("horizontal_layout") 
         
-        self.console_box = QTextEdit(self.horizontalLayoutWidget)
+        # 콘솔 TextEdit
+        self.console_box = QTextEdit(self.horizontal_layoutWidget)
         # self.console_box.setEnabled(False)
 
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -74,33 +73,37 @@ class MainWindow(QMainWindow):
         self.console_box.setReadOnly(True)
         self.console_box.setObjectName("console_box")
 
-        self.horizontalLayout.addWidget(self.console_box)
+        self.horizontal_layout.addWidget(self.console_box)
 
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setContentsMargins(60, -1, -1, -1)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.vertical_layout = QVBoxLayout()
+        self.vertical_layout.setContentsMargins(60, -1, -1, -1)
+        self.vertical_layout.setObjectName("vertical_layout")
 
-        self.lcdNumber = QLCDNumber(self.horizontalLayoutWidget)
-        self.lcdNumber.setMaximumSize(QSize(16777215, 70))
-        self.lcdNumber.setObjectName("lcdNumber")
-        self.verticalLayout.addWidget(self.lcdNumber)
+        # 타이머 LCD
+        self.lcd_number = QLCDNumber(self.horizontal_layoutWidget)
+        self.lcd_number.setMaximumSize(QSize(16777215, 70))
+        self.lcd_number.setObjectName("lcd_number")
+        self.vertical_layout.addWidget(self.lcd_number)
 
-        self.btn_launch = QPushButton(self.horizontalLayoutWidget)
+        # 발사 버튼
+        self.btn_launch = QPushButton(self.horizontal_layoutWidget)
         self.btn_launch.setEnabled(False)
         self.btn_launch.setObjectName("btn_launch")
-        self.btn_launch.clicked.connect(self.btn_clicked)
+        self.btn_launch.clicked.connect(self.BtnClicked)
 
-        self.verticalLayout.addWidget(self.btn_launch)
-        self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.vertical_layout.addWidget(self.btn_launch)
+        self.vertical_layout_2 = QVBoxLayout()
+        self.vertical_layout_2.setObjectName("vertical_layout_2")
+        self.horizontal_layout_2 = QHBoxLayout()
+        self.horizontal_layout_2.setObjectName("horizontal_layout_2")
 
-        self.label = QLabel(self.horizontalLayoutWidget)
+        # 남은 탄 개수 label
+        self.label = QLabel(self.horizontal_layoutWidget)
         self.label.setObjectName("label")
-        self.horizontalLayout_2.addWidget(self.label)
+        self.horizontal_layout_2.addWidget(self.label)
 
-        self.num_bullet = QLabel(self.horizontalLayoutWidget)
+        # 숫자 label
+        self.num_bullet = QLabel(self.horizontal_layoutWidget)
         self.num_bullet.setObjectName("num_bullet")
 
         _translate = QCoreApplication.translate
@@ -108,12 +111,12 @@ class MainWindow(QMainWindow):
         self.label.setText(_translate("MainWindow", "남은 탄 개수 :"))
         self.num_bullet.setText(_translate("MainWindow", str(self.counter)))
 
-        self.horizontalLayout_2.addWidget(self.num_bullet)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.horizontalLayout.addLayout(self.verticalLayout)
+        self.horizontal_layout_2.addWidget(self.num_bullet)
+        self.vertical_layout_2.addLayout(self.horizontal_layout_2)
+        self.vertical_layout.addLayout(self.vertical_layout_2)
+        self.horizontal_layout.addLayout(self.vertical_layout)
 
-        self.setCentralWidget(self.centralwidget)
+        self.setCentralWidget(self.central_widget)
 
         self.menubar = QMenuBar()
         self.menubar.setGeometry(QRect(0, 0, 800, 28))
@@ -134,14 +137,16 @@ class MainWindow(QMainWindow):
         self.move(1000, 600)
         self.show()
         
-    def startThread(self):
+    def StartThread(self):
+        """Thread 동작 시작"""
         self.video_thread = ReceiveFrame(self.frame_queue)
         self.video_thread.start()        
         self.hw_thread = ReceiveMessage(self.msg_queue)
-        self.hw_thread.rcv_msg_signal.connect(self.console_msg)
+        self.hw_thread.rcv_msg_signal.connect(self.ConsoleMsg)
         self.hw_thread.start()
         
-    def btn_clicked(self):
+    def BtnClicked(self):
+        """발사 버튼 클릭 시 이벤트"""
         SendMsg()
         self.counter -= 1
         self.count_timer = 5
@@ -162,34 +167,35 @@ class MainWindow(QMainWindow):
             # self.console_box.append("탄을 모두 소진하였습니다")
             self.btn_launch.setEnabled(False)
             
-    # LCD 타이머 
-    def updateCount(self):
-        # LCD 타이머
+    def UpdateCount(self):
+        """LCD 타이머로 5초 카운트"""
         timer_LCD = QTimer(self)
-        timer_LCD.timeout.connect(self.updateCount)
+        timer_LCD.timeout.connect(self.UpdateCount)
         timer_LCD.start(1000) 
         
         if self.count_timer >= 0:
             if self.count_timer == 0:
                 self.btn_launch.setEnabled(True)
-            self.lcdNumber.display(self.count_timer)
+            self.lcd_number.display(self.count_timer)
             self.count_timer -= 1
         else:
             timer_LCD.stop()  # 카운트가 0 이하로 내려가면 타이머 중지
             # 버튼 활성화
             
-    def console_msg(self):
+    def ConsoleMsg(self):
+        """콘솔 박스에 메세지 띄우기"""
         if self.msg_queue:
             msg = self.msg_queue.get()
             
             if len(msg) < 2:
                 # hw 발사 준비 완료되면 카운트 시작
                 self.console_box.append("{} 발사 준비 완료 카운트 시작".format(self.formatted_datetime))
-                self.updateCount()
+                self.UpdateCount()
             else:
                 self.console_box.append("{} {}".format(self.formatted_datetime, msg))
         
-    def camViewer(self):
+    def CamViewer(self):
+        """웹캠 영역에 영상 띄우기"""
         if self.frame_queue:
             frame = self.frame_queue.get()
             
@@ -204,7 +210,8 @@ class MainWindow(QMainWindow):
             else:
                 print("Invalid Image Data")
                 
-    def closeThread(self, event):
+    def CloseThread(self, event):
+        """Thread 종료"""
         self.video_thread.quit()
         self.video_thread.wait()
         self.hw_thread.quit()
