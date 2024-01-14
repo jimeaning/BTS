@@ -1,3 +1,6 @@
+"""
+콘솔 메시지 통신을 위한 모듈
+"""
 import socket
 from PyQt5.QtCore import QThread, pyqtSignal
 
@@ -6,6 +9,7 @@ server_port = 4000
         
 
 class ReceiveMessage(QThread):
+    """콘솔 메시지 통신을 위한 클래스"""
     rcv_msg_signal = pyqtSignal()
     
     def __init__(self, msg_queue):
