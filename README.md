@@ -1,7 +1,8 @@
 # Project BTS
 
 * 표적 탐지 미사일 자동화 시스템
-표적을 감지하여 알맞은 미사일 선택 후 올바른 각도와 세기로 격파하는 시스템
+표적을 감지하여 알맞은 미사일 선택 후 올바른 각도와 세기로 격파하는 시스템  
+줄어드는 청년 인구에 따른 군 인력 문제를 해결하기 위한 초소 자동화 시스템
 
 ## High Level Design
 
@@ -31,21 +32,48 @@ pip install -r requirements.txt
 ## Steps to build
 
 ```shell
-cd ~/bts
-source .venv/bin/activate
-
-make
-make install
+cd ~/BTS
+./setup.sh
 ```
 
 ## Steps to run
 
-```shell
-cd ~/bts
-source .venv/bin/activate
+**Follow the order : Server -> User -> RaspberryPi**
 
-cd /path/to/repo/xxx/
-python demo.py -i xxx -m yyy -d zzz
+**1. for Server**
+
+```shell
+cd ~/BTS
+source .venv/bin/activate
+cd Server
+python3 main.py
+```
+
+**2. for User**
+
+```shell
+cd ~/BTS
+source .venv/bin/activate
+cd User
+python3 main.py
+```
+
+**3. for RaspberryPi**
+
+- Camera
+
+```shell
+cd ~/BTS/RaspberryPi/build
+sudo ./program
+```
+
+- HW
+
+```shell
+cd ~/BTS
+source .venv/bin/activate
+cd RaspberryPi
+python3 rasp2server.py
 ```
 
 ## Output
