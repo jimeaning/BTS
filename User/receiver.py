@@ -4,7 +4,7 @@
 import socket
 from PyQt5.QtCore import QThread, pyqtSignal
 
-server_ip = "10.10.15.103"
+server_ip = "127.0.0.1"
 server_port = 4000
         
 
