@@ -2,15 +2,15 @@
 GUI 모듈
 """
 import queue
+import pygame
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QVBoxLayout, QFrame, QHBoxLayout, QTextEdit, QSizePolicy, QLCDNumber, QPushButton, QMenuBar,QStatusBar
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import Qt, QCoreApplication, QUrl, QTimer, QDateTime, QRect, QSize, QMetaObject
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 from receive_frame import ReceiveFrame
 from receiver import ReceiveMessage
-from sender import SendMsg
+from sender import SendMessage
 
 
 class MainWindow(QMainWindow):
@@ -19,19 +19,19 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.counter = 3 # 남은 탄 개수
         self.count_timer = 5  # 초기 타이머 남은 시간
-        self.initUI()
-        
-        # 콘솔에 출력될 시간
-        current_datetime = QDateTime.currentDateTime()
-        self.formatted_datetime = current_datetime.toString("yyyy-MM-dd hh:mm:ss")
         
         self.frame_queue = queue.Queue(maxsize=30)    # 프레임이 저장될 큐
         self.msg_queue = queue.Queue(maxsize=30)    # 메세지가 저장될 큐
         self.StartThread()
+        
+        self.timer_LCD = QTimer(self)
+        self.timer_LCD.timeout.connect(self.UpdateCount)
                 
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.CamViewer)
         self.timer.start(30)
+        
+        self.initUI()
         
     def initUI(self):        
         # Main window
@@ -145,54 +145,64 @@ class MainWindow(QMainWindow):
         self.hw_thread.rcv_msg_signal.connect(self.ConsoleMsg)
         self.hw_thread.start()
         
+    def ShowTimeline(self):
+        """console에 찍히는 현재 시간"""
+        current_datetime = QDateTime.currentDateTime()
+        formatted_datetime = current_datetime.toString("yyyy-MM-dd hh:mm:ss")
+
+        return formatted_datetime
+
     def BtnClicked(self):
         """발사 버튼 클릭 시 이벤트"""
-        SendMsg()
+        sending = SendMessage()
+        sending.SendMsg()
+        # SendMsg()
         self.counter -= 1
         self.count_timer = 5
         self.num_bullet.setText(str(self.counter))
         
+        self.btn_launch.setEnabled(False)
+        
         # 펑 터지는 오디오
-        self.media_player = QMediaPlayer()
-
-        audio_file_path = '/home/jm/BTS/PC/Server/resources/explode.mp3'
-        media_content = QMediaContent(QUrl.fromLocalFile(audio_file_path))
-        self.media_player.setMedia(media_content)
+        pygame.mixer.init()
+        pygame.mixer.music.load("resources/explode.mp3")
+        pygame.mixer.music.play()
         
-        self.media_player.play()
-        
-        if self.counter == 0:
-            self.console_box.append("{} 탄을 모두 소진하였습니다".format(self.formatted_datetime))
+        if self.counter <= 0:
+            self.console_box.append("{} 탄을 모두 소진하였습니다".format(self.ShowTimeline()))
             # self.console_box.setPlainText(self.formatted_datetime)
             # self.console_box.append("탄을 모두 소진하였습니다")
-            self.btn_launch.setEnabled(False)
+            
+    def StartCountdown(self):
+        """타이머 5초로 초기화하고 카운트 시작 메서드 호출"""
+        self.count_timer = 5  # 초기 타이머 남은 시간
+        self.UpdateCount()
+        self.timer_LCD.start(1000)
             
     def UpdateCount(self):
         """LCD 타이머로 5초 카운트"""
-        timer_LCD = QTimer(self)
-        timer_LCD.timeout.connect(self.UpdateCount)
-        timer_LCD.start(1000) 
+        self.lcd_number.display(self.count_timer)
+        self.count_timer -= 1
+
+        if self.count_timer < 0:
+            # 타이머 중지
+            self.timer_LCD.stop()
         
-        if self.count_timer >= 0:
-            if self.count_timer == 0:
-                self.btn_launch.setEnabled(True)
-            self.lcd_number.display(self.count_timer)
-            self.count_timer -= 1
-        else:
-            timer_LCD.stop()  # 카운트가 0 이하로 내려가면 타이머 중지
-            # 버튼 활성화
+            self.btn_launch.setEnabled(True)
             
     def ConsoleMsg(self):
         """콘솔 박스에 메세지 띄우기"""
         if self.msg_queue:
             msg = self.msg_queue.get()
             
-            if len(msg) < 2:
-                # hw 발사 준비 완료되면 카운트 시작
-                self.console_box.append("{} 발사 준비 완료 카운트 시작".format(self.formatted_datetime))
-                self.UpdateCount()
+            if msg == "발사 준비 완료":
+                if self.counter > 0:
+                    # hw 발사 준비 완료되면 카운트 시작
+                    self.console_box.append("{} 발사 준비 완료 카운트 시작".format(self.ShowTimeline()))
+                    if self.counter > 0:
+                        self.StartCountdown()
             else:
-                self.console_box.append("{} {}".format(self.formatted_datetime, msg))
+                self.console_box.append("{} {}".format(self.ShowTimeline(), msg))
         
     def CamViewer(self):
         """웹캠 영역에 영상 띄우기"""

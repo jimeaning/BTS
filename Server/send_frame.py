@@ -7,7 +7,7 @@ import struct
 
 # 서버 설정
 host = "127.0.0.1"
-port = 5000
+port = 2000
 
 
 class SendFrame:
