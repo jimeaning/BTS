@@ -40,6 +40,9 @@
 - **통신 Sequence**
 ![image](https://github.com/jimeaning/BTS/assets/62744644/4325ec3f-ddf0-40e1-8881-cabab186c258)
 
+- **Multi Thread Processing**
+![multithread](https://github.com/jimeaning/BTS/assets/62744644/3f6404a7-5e79-4f58-9366-97973bf34265)
+
 ### 🦿 시스템 아키텍처
 ![image](https://github.com/jimeaning/BTS/assets/62744644/fa4de51c-99dd-4ee0-a929-7398ae921d40)
 
