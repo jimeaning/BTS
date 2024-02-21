@@ -48,9 +48,9 @@
 - Thread Process	
 	- Video Thread : 카메라 영상을 frame으로 받아 와 GUI에 계속 출력한다<br>
 	- SIG Thread <br>
-	1. 객체가 detected 되면 어떤 type인지, classification 되면 어떤 종류인지를 받는다
- 	2. 객체의 종류에 따라 무기를 선택하면 해당 무기 번호 signal을 수신한다
-  	3. 물체를 카메라 중앙에 위치시킨 후 발사 완료 signal을 수신한다
+	1. 객체가 detected 되면 어떤 type인지, classification 되면 어떤 종류인지 메세지를 받는다
+ 	2. 객체의 종류에 따라 무기를 선택하면 해당 무기 번호 signal을 송신한다
+  	3. 물체를 카메라 중앙에 위치시킨 후 발사 완료 signal을 송신한다
    	4. 발사 완료 후 signal을 보내 모듈이 초기화되고 시스템이 재개될 수 있도록 한다
 
 ### 🦿 시스템 아키텍처
