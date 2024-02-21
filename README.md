@@ -38,11 +38,20 @@
 ![image](https://github.com/jimeaning/BTS/assets/62744644/cdae17cc-fc73-495a-9611-3314cca90495)
 
 - **통신 Sequence**
+
 ![image](https://github.com/jimeaning/BTS/assets/62744644/4325ec3f-ddf0-40e1-8881-cabab186c258)
 
 - **Multi Thread Processing**
   
-![multithread](https://github.com/jimeaning/BTS/assets/62744644/3f6404a7-5e79-4f58-9366-97973bf34265)
+![image](https://github.com/jimeaning/BTS/assets/62744644/9a0144b5-2b4e-4535-853f-ad74d132b9ce)
+
+- Thread Process	
+	- Video Thread : 카메라 영상을 frame으로 받아 와 GUI에 계속 출력한다<br>
+	- SIG Thread <br>
+	1. 객체가 detected 되면 어떤 type인지, classification 되면 어떤 종류인지를 받는다
+ 	2. 객체의 종류에 따라 무기를 선택하면 해당 무기 번호 signal을 수신한다
+  	3. 물체를 카메라 중앙에 위치시킨 후 발사 완료 signal을 수신한다
+   	4. 발사 완료 후 signal을 보내 모듈이 초기화되고 시스템이 재개될 수 있도록 한다
 
 ### 🦿 시스템 아키텍처
 ![image](https://github.com/jimeaning/BTS/assets/62744644/fa4de51c-99dd-4ee0-a929-7398ae921d40)
